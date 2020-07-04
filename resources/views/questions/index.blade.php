@@ -29,7 +29,7 @@
             <td>
             <a class="btn btn-small btn-info" href="jawaban/{{$tanya->id}}">Tampil</a>
             <a class="btn btn-small btn-info" href="jawaban/create/{{$tanya->id}}">Jawab</a>
-            <a class="btn btn-small btn-info" href="jawaban/create/{{$tanya->id}}">update</a>
+            <a class="btn btn-small btn-info" href="pertanyaan/{{$tanya->id}}/edit">update</a>
             <form action="{{url('pertanyaan/hapus')}}/{{$tanya->id}}" method="post" style="display: inline">
             @csrf
             @method('DELETE')

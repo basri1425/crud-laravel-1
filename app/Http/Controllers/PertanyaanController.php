@@ -75,7 +75,7 @@ class PertanyaanController extends Controller
      */
     public function edit(Pertanyaan $pertanyaan)
     {
-        //
+        return view('questions.update', compact('pertanyaan'));
     }
 
     /**
@@ -87,7 +87,13 @@ class PertanyaanController extends Controller
      */
     public function update(Request $request, Pertanyaan $pertanyaan)
     {
-        //
+        Pertanyaan::where('id',$pertanyaan->id)
+            ->update([
+            'judul' => $request->judul,
+            'isi' => $request->isi
+        ]);
+
+        return redirect('/pertanyaan')->with('success','Data Omset Telah diUpdate !!!');
     }
 
     /**

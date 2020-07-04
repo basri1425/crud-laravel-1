@@ -22,6 +22,8 @@ Route::get('/pertanyaan','PertanyaanController@index');
 Route::get('/pertanyaan/create','PertanyaanController@create');
 // menyimpan data baru ke tabel pertanyaan
 Route::post('/pertanyaan','PertanyaanController@store');
+Route::get('/pertanyaan/{pertanyaan}/edit','PertanyaanController@edit');
+Route::patch('/pertanyaan/{pertanyaan}','PertanyaanController@update');
 Route::delete('/pertanyaan/hapus/{id}','PertanyaanController@destroy');
 
 // menampilkan jawaban dari pertanyaan dengan id tertentu (group id)
