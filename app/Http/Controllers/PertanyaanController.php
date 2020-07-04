@@ -18,7 +18,7 @@ class PertanyaanController extends Controller
 
     return view('questions.index', compact('tanya'));
 
-        return view('questions.index');
+
     }
 
     /**
@@ -96,8 +96,10 @@ class PertanyaanController extends Controller
      * @param  \App\Pertanyaan  $pertanyaan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pertanyaan $pertanyaan)
+    public function destroy($id)
     {
-        //
+        $model = Pertanyaan::find($id);
+        $model->delete();
+        return redirect('/pertanyaan')->with('success','Data berhasil dihapus !!!');
     }
 }

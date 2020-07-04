@@ -17,32 +17,29 @@
           <thead>
           <tr>
             <th>Pertanyaan</th>
-            <th>Tanggal Pertanyaan</th>
+            <th>Jawaban</th>
             <th>Action</th>
           </tr>
           </thead>
           <tbody>
-          @foreach($tanya as $tanya)
+          
           <tr>
-            <td>{{$tanya->judul}}</td>
             <td>{{$tanya->isi}}</td>
             <td>
-            <a class="btn btn-small btn-info" href="jawaban/{{$tanya->id}}">Tampil</a>
-            <a class="btn btn-small btn-info" href="jawaban/create/{{$tanya->id}}">Jawab</a>
-            <a class="btn btn-small btn-info" href="jawaban/create/{{$tanya->id}}">update</a>
-            <form action="{{url('pertanyaan/hapus')}}/{{$tanya->id}}" method="post" style="display: inline">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-small btn-info"><i class="fas fa-trash"></i></button>
-            </form>
+            @foreach($jawab as $jawab)
+            - 
+            {{$jawab->isiJawab}}
+            <br>
+            @endforeach
             </td>
+            <td>-</td>
           </tr>
-          @endforeach
+          
           </tbody>
           <tfoot>
           <tr>
           <th>Pertanyaan</th>
-            <th>Tanggal Pertanyaan</th>
+            <th>Jawaban</th>
             <th>Action</th>
           </tr>
           </tfoot>

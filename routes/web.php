@@ -22,7 +22,16 @@ Route::get('/pertanyaan','PertanyaanController@index');
 Route::get('/pertanyaan/create','PertanyaanController@create');
 // menyimpan data baru ke tabel pertanyaan
 Route::post('/pertanyaan','PertanyaanController@store');
+Route::delete('/pertanyaan/hapus/{id}','PertanyaanController@destroy');
+
+// menampilkan jawaban dari pertanyaan dengan id tertentu (group id)
+Route::get('/jawaban','JawabanController@index');
+
 // menampilkan jawaban dari pertanyaan dengan id tertentu
-Route::get('/jawaban/{pertanyaan_id}','JawabanController@index');
+Route::get('/jawaban/{pertanyaan_id}','JawabanController@show');
+// menjawab dari pertanyaan dengan id tertentu
+Route::get('/jawaban/create/{pertanyaan_id}','JawabanController@create');
+Route::post('/jawaban','JawabanController@store');
 // menyimpan jawaban baru untuk pertanyaan dengan id tertentu
 Route::post('/jawaban/{pertanyaan_id}','JawabanController@store');
+

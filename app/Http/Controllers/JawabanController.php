@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Jawaban;
+use App\Pertanyaan;
 use Illuminate\Http\Request;
+use DB;
 
 class JawabanController extends Controller
 {
@@ -14,7 +16,18 @@ class JawabanController extends Controller
      */
     public function index()
     {
-        //
+        $tanya = DB::table('pertanyaans')
+        ->orderByRaw('id')
+        ->get();
+            // return $tanya;
+        $jawab = DB::table('jawabans')
+        // ->where('pertanyaan_id',$pertanyaan_id)->get()
+            ->join('pertanyaans', 'jawabans.pertanyaan_id', '=', 'pertanyaans.id')
+            ->select('jawabans.*', 'pertanyaans.*')
+            ->get();
+        // return $jawab;
+
+        return view('answers.index', compact('jawab','tanya'));
     }
 
     /**
@@ -22,9 +35,12 @@ class JawabanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($pertanyaan_id)
     {
-        //
+        $tanya = DB::table('pertanyaans')->where('id',$pertanyaan_id)->get();
+        // return $tanya;
+        return view('answers.formJawab', compact('tanya'));
+
     }
 
     /**
@@ -35,7 +51,20 @@ class JawabanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request;
+        $request -> validate([
+
+            'isiJawab'=> 'required'
+        ]);
+
+        // $status = Omset::create($request->all());
+
+        try {
+            $status = Jawaban::create($request->all());
+            return redirect('/pertanyaan')->with('success','Data Omset sudah Tersimpan !!!');
+        } catch (\Exception $e)  {
+            return redirect('/pertanyaan')->with('error','Data Omset tidak dapat disimpan - cek tanggal omset !!!');
+        }
     }
 
     /**
@@ -44,9 +73,15 @@ class JawabanController extends Controller
      * @param  \App\Jawaban  $jawaban
      * @return \Illuminate\Http\Response
      */
-    public function show(Jawaban $jawaban)
+    public function show($pertanyaan_id)
     {
-        //
+        $tanya = DB::table('pertanyaans')
+        ->where('id',$pertanyaan_id)->get();
+
+        $jawab = DB::table('jawabans')
+        ->where('pertanyaan_id',$pertanyaan_id)->get();
+
+        return view('answers.show', compact('jawab','tanya'));
     }
 
     /**
