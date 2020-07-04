@@ -17,7 +17,7 @@ class CreateJawabansTable extends Migration
             $table->id();
             $table->text('isiJawab');
             $table->unsignedBigInteger('pertanyaan_id');
-            $table->foreign('pertanyaan_id')->references('id')->on('pertanyaans');
+            $table->foreign('pertanyaan_id')->references('id')->on('pertanyaans')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -106,6 +106,9 @@ class PertanyaanController extends Controller
     {
         $model = Pertanyaan::find($id);
         $model->delete();
+
+        // $model1 = Jawaban::find($id);
+        // $model1->delete();
         return redirect('/pertanyaan')->with('success','Data berhasil dihapus !!!');
     }
 }
